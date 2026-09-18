@@ -32,7 +32,8 @@ You open the name on pump.fun. You decide.
 ## Run
 
 ```bash
-python -m http.server 8787 --bind 127.0.0.1
+npm test
+npm start
 ```
 
 Open http://127.0.0.1:8787
@@ -40,9 +41,16 @@ Open http://127.0.0.1:8787
 ## Layout
 
 ```
-index.html          1280×720 hill desk
-src/tape.js         paper king / climb / fall tape
-assets/             stills for the readme
+src/rules.js      curve window + seat clocks
+src/window.js     NOISE / HILL / SCREEN
+src/seat.js       too raw / seated / stale
+src/climb.js      challenger pressure
+src/fall.js       throne change
+src/hill.js       SEAT / CLIMB / FALL read
+src/runtime.js    paper tick, send always false
+src/tape.js       demo tape for the desk
+scripts/serve.mjs local static desk
+test/             node:test
 ```
 
 ## Live later

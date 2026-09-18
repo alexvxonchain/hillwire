@@ -1,3 +1,6 @@
+import { clamp } from "./rules.js";
+import { inWindow } from "./window.js";
+
 export const START = {
   king: { ticker: "RIDGE", ca: "7Rk…w2n", fill: 68.4, seatSec: 94, mcap: 18.4 },
   climbers: [
@@ -45,9 +48,5 @@ export function at(t) {
 
   king.fill = clamp(king.fill, 4, 96);
   for (const c of climbers) c.fill = clamp(c.fill, 4, 96);
-  return { king, climbers, event, note, window: king.fill >= 62 && king.fill <= 91 };
-}
-
-function clamp(n, a, b) {
-  return Math.max(a, Math.min(b, n));
+  return { king, climbers, event, note, window: inWindow(king.fill) };
 }

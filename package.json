@@ -2,5 +2,10 @@
   "name": "hillwire",
   "private": true,
   "version": "0.1.0",
-  "description": "Paper hill desk for pump.fun. Watches the king, not the firehose."
+  "type": "module",
+  "description": "Paper hill desk for pump.fun. Watches the king, not the firehose.",
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "test": "node --test"
+  }
 }
