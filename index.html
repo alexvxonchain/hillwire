@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1280" />
+  <title>HILLWIRE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0c0b0a;
+      --panel: #141210;
+      --line: #2b251e;
+      --copper: #d08a4c;
+      --cream: #f0e6d8;
+      --mute: #8a7f72;
+      --fall: #c45c48;
+      --climb: #a3ad78;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: #000; height: 100%; }
+    body { display: grid; place-items: center; }
+    #stage {
+      width: 1280px; height: 720px;
+      background: radial-gradient(1200px 500px at 20% -10%, #1b1612 0%, var(--bg) 55%);
+      color: var(--cream);
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      position: relative; overflow: hidden;
+      border: 1px solid var(--line);
+    }
+    header, footer {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 22px 28px 0;
+    }
+    .brand { font-family: Syne, sans-serif; font-weight: 800; letter-spacing: .12em; font-size: 22px; }
+    .brand span { color: var(--copper); }
+    .meta, footer { color: var(--mute); font-size: 12px; letter-spacing: .08em; }
+    .grid {
+      display: grid; grid-template-columns: 1.35fr .65fr; gap: 16px;
+      padding: 18px 28px 12px;
+      height: 560px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      padding: 22px 24px;
+      position: relative;
+    }
+    .k { font-size: 11px; color: var(--mute); letter-spacing: .18em; }
+    .ticker { font-family: Syne, sans-serif; font-size: 84px; line-height: .9; font-weight: 800; margin: 10px 0 8px; }
+    .ca { color: var(--mute); font-size: 13px; }
+    .fill-row { margin: 22px 0 10px; display: flex; justify-content: space-between; font-size: 13px; }
+    .bar { height: 8px; background: #2a231c; overflow: hidden; }
+    .bar > i { display: block; height: 100%; background: linear-gradient(90deg, #8a5a32, var(--copper)); width: 0%; }
+    .hill {
+      margin-top: 28px; height: 168px; display: flex; align-items: flex-end; gap: 8px;
+    }
+    .hill b {
+      flex: 1; background: #1b1713; border-top: 2px solid #3a3128;
+      position: relative;
+    }
+    .hill b i {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(180deg, #e2a56a, #8a4e24);
+    }
+    .stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 18px; }
+    .stats div { border: 1px solid var(--line); padding: 10px 12px; }
+    .stats em { display: block; font-style: normal; color: var(--mute); font-size: 10px; letter-spacing: .14em; }
+    .event { position: absolute; top: 22px; right: 22px; font-size: 12px; letter-spacing: .16em; color: var(--copper); }
+    .event.FALL { color: var(--fall); }
+    .event.CLIMB { color: var(--climb); }
+    .climber { display: grid; grid-template-columns: 22px 1fr auto; gap: 8px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .climber:last-child { border-bottom: 0; }
+    .log { height: 88px; margin: 0 28px 16px; border-top: 1px solid var(--line); padding-top: 10px; font-size: 12px; color: var(--mute); }
+    .log b { color: var(--cream); font-weight: 500; }
+    #boot {
+      position: absolute; inset: 0; background: var(--bg); display: grid; place-items: center;
+      z-index: 5; transition: opacity .6s ease;
+    }
+    #boot .t { font-family: Syne, sans-serif; font-size: 64px; font-weight: 800; letter-spacing: .18em; }
+    #boot .s { color: var(--mute); margin-top: 10px; letter-spacing: .2em; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div id="stage">
+    <div id="boot"><div><div class="t">HILL<span style="color:#d08a4c">WIRE</span></div><div class="s">PUMP.FUN HILL DESK</div></div></div>
+    <header>
+      <div class="brand">HILL<span>WIRE</span></div>
+      <div class="meta">PUMP.FUN HILL DESK · ALEXYZ · PAPER</div>
+      <div class="meta" id="clock">00:00</div>
+    </header>
+    <div class="grid">
+      <section class="card" id="king">
+        <div class="event" id="event">SEAT</div>
+        <div class="k">CURRENT KING</div>
+        <div class="ticker" id="ticker">RIDGE</div>
+        <div class="ca" id="ca">7Rk…w2n</div>
+        <div class="fill-row"><span>curve fill</span><span id="filln">68.4%</span></div>
+        <div class="bar"><i id="fillb"></i></div>
+        <div class="hill" id="hill"></div>
+        <div class="stats">
+          <div><em>SEAT</em><span id="seat">01:34</span></div>
+          <div><em>MCAP</em><span id="mcap">$18.4k</span></div>
+          <div><em>WINDOW</em><span id="win">IN</span></div>
+        </div>
+      </section>
+      <section class="card">
+        <div class="k">CLIMB STACK</div>
+        <div id="stack"></div>
+      </section>
+    </div>
+    <div class="log" id="log"></div>
+    <footer>
+      <div>NO KEYS · NOTHING SENDS · OPEN ON PUMP.FUN</div>
+      <div>github.com/alexvxonchain/hillwire</div>
+    </footer>
+  </div>
+  <script type="module">
+    import { at } from "./src/tape.js";
+    const hill = document.getElementById("hill");
+    for (let i = 0; i < 11; i++) {
+      const b = document.createElement("b");
+      b.style.height = `${40 + i * 11}px`;
+      b.innerHTML = "<i></i>";
+      hill.appendChild(b);
+    }
+    const logs = [];
+    const t0 = performance.now();
+    function pad(n) { return String(Math.floor(n)).padStart(2, "0"); }
+    function tick(now) {
+      const t = (now - t0) / 1000;
+      if (t > 1.8) document.getElementById("boot").style.opacity = "0";
+      const s = at(t % 40);
+      document.getElementById("clock").textContent = `00:${pad(t % 60)}`;
+      document.getElementById("ticker").textContent = s.king.ticker;
+      document.getElementById("ca").textContent = s.king.ca;
+      document.getElementById("filln").textContent = s.king.fill.toFixed(1) + "%";
+      document.getElementById("fillb").style.width = s.king.fill + "%";
+      document.getElementById("seat").textContent = `${pad(s.king.seatSec / 60)}:${pad(s.king.seatSec % 60)}`;
+      document.getElementById("mcap").textContent = "$" + s.king.mcap.toFixed(1) + "k";
+      document.getElementById("win").textContent = s.window ? "IN" : "OUT";
+      const ev = document.getElementById("event");
+      ev.textContent = s.event;
+      ev.className = "event " + s.event;
+      document.getElementById("stack").innerHTML = s.climbers.map((c, i) =>
+        `<div class="climber"><span>${i + 1}</span><span>${c.ticker}</span><span>${c.fill.toFixed(1)}%</span></div>`
+      ).join("");
+      const cols = [...hill.querySelectorAll("i")];
+      cols.forEach((el, i) => {
+        const h = Math.max(8, (s.king.fill / 100) * (40 + i * 14));
+        el.style.height = h + "px";
+      });
+      if (logs[logs.length - 1] !== s.note) {
+        logs.push(s.note);
+        document.getElementById("log").innerHTML = logs.slice(-3).map((x) => `<div><b>${s.event}</b>  ${x}</div>`).join("");
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  </script>
+</body>
+</html>

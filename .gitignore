@@ -1,0 +1,16 @@
+node_modules/
+.playwright/
+frames/
+*.webm
+.DS_Store
+.vscode/
+__pycache__/
+assets/ref/
+assets/bed.wav
+assets/hillwire.mp4
+assets/hillwire_silent.mp4
+assets/hillwire_post.mp4
+assets/videoplayback.mp4
+assets/chk*.jpg
+assets/preview_first.jpg
+post-x.txt
